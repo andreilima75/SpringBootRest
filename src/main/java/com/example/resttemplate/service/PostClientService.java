@@ -4,11 +4,7 @@ import com.example.resttemplate.model.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -18,10 +14,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Service that demonstrates common RestTemplate operations
- * against the public JSONPlaceholder API.
- */
 @Service
 public class PostClientService {
 
@@ -36,9 +28,6 @@ public class PostClientService {
         this.baseUrl = baseUrl;
     }
 
-    /**
-     * GET - Retrieve a single post by ID using getForObject.
-     */
     public Post getPostById(Long id) {
         String url = baseUrl + "/posts/{id}";
         log.debug("GET {}", url.replace("{id}", String.valueOf(id)));
@@ -51,9 +40,6 @@ public class PostClientService {
         }
     }
 
-    /**
-     * GET - Retrieve all posts (or filtered) using getForEntity + ResponseEntity.
-     */
     public List<Post> getPosts(Long userId) {
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromHttpUrl(baseUrl + "/posts");
@@ -75,9 +61,6 @@ public class PostClientService {
         }
     }
 
-    /**
-     * POST - Create a new post using postForObject.
-     */
     public Post createPost(Post post) {
         String url = baseUrl + "/posts";
         log.debug("POST {} with body: {}", url, post);
@@ -90,9 +73,6 @@ public class PostClientService {
         }
     }
 
-    /**
-     * PUT - Update a post using exchange (most flexible method).
-     */
     public Post updatePost(Long id, Post post) {
         String url = baseUrl + "/posts/{id}";
         log.debug("PUT {} with body: {}", url.replace("{id}", String.valueOf(id)), post);
@@ -116,9 +96,6 @@ public class PostClientService {
         }
     }
 
-    /**
-     * DELETE - Delete a post using delete.
-     */
     public void deletePost(Long id) {
         String url = baseUrl + "/posts/{id}";
         log.debug("DELETE {}", url.replace("{id}", String.valueOf(id)));

@@ -4,9 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Domain model matching JSONPlaceholder /posts resource.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
